@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For You ❤️</title>
+    <title>For You 🌷</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #ffe6e6 0%, #ffb3c6 100%);
+            /* Soft blush fading into a deep crimson */
+            background: linear-gradient(135deg, #ffccd5 0%, #dc143c 100%);
             color: #4a4a4a;
             display: flex;
             flex-direction: column;
@@ -20,10 +21,10 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.92);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 105, 135, 0.2);
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
             text-align: center;
             max-width: 600px;
             margin: 20px;
@@ -31,7 +32,8 @@
         }
 
         h1 {
-            color: #ff4d6d;
+            /* Crimson text */
+            color: #dc143c;
             font-size: 2.5em;
             margin-bottom: 10px;
         }
@@ -41,23 +43,18 @@
             line-height: 1.6;
         }
 
-        .heart {
-            color: #ff4d6d;
-            font-size: 50px;
-            animation: heartbeat 1.5s infinite;
+        .center-icon {
+            font-size: 60px;
+            animation: gentle-bounce 2.5s infinite ease-in-out;
         }
 
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            20% { transform: scale(1.25); }
-            40% { transform: scale(1); }
-            60% { transform: scale(1.15); }
-            80% { transform: scale(1); }
-            100% { transform: scale(1); }
+        @keyframes gentle-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
 
-        /* Floating background hearts */
-        .floating-hearts {
+        /* Floating background elements */
+        .floating-tulips {
             position: fixed;
             top: 0;
             left: 0;
@@ -67,14 +64,14 @@
             z-index: 1;
         }
 
-        .float-heart {
+        .float-item {
             position: absolute;
-            color: rgba(255, 77, 109, 0.4);
+            opacity: 0.7;
             animation: floatUp 10s linear infinite;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.9; }
             100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
         }
         
@@ -90,8 +87,9 @@
             height: 120px;
             object-fit: cover;
             border-radius: 15px;
-            border: 3px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            /* Crimson image borders */
+            border: 3px solid #dc143c;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
         }
 
@@ -102,37 +100,38 @@
 </head>
 <body>
 
-    <div class="floating-hearts" id="floating-hearts"></div>
+    <div class="floating-tulips" id="floating-tulips"></div>
 
     <div class="container">
-        <div class="heart">❤️</div>
+        <div class="center-icon">🌷</div>
         <h1>To My Favorite Person</h1>
         <p>
             I built this little corner of the internet just for us. 
-            Every day with you is my favorite day. Thank you for being you!
+            Like a crimson tulip, you bring so much beautiful color into my life!
         </p>
         
         <div class="gallery">
-            <img src="https://via.placeholder.com/150/ffb3c6/ffffff?text=Photo+1" alt="Us">
-            <img src="https://via.placeholder.com/150/ffb3c6/ffffff?text=Photo+2" alt="Us">
-            <img src="https://via.placeholder.com/150/ffb3c6/ffffff?text=Photo+3" alt="Us">
+            <!-- Add links to your actual photos here -->
+            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+1" alt="Us">
+            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+2" alt="Us">
+            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+3" alt="Us">
         </div>
     </div>
 
     <script>
-        // Generate floating hearts
-        const container = document.getElementById('floating-hearts');
-        const heartSymbols = ['❤️', '💖', '✨', '💕'];
+        // Generate floating tulips and sparkles
+        const container = document.getElementById('floating-tulips');
+        const floatSymbols = ['🌷', '🌷', '✨', '❤️']; 
         
         for (let i = 0; i < 25; i++) {
-            let heart = document.createElement('div');
-            heart.classList.add('float-heart');
-            heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
-            heart.style.animationDelay = (Math.random() * 5) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            container.appendChild(heart);
+            let item = document.createElement('div');
+            item.classList.add('float-item');
+            item.innerText = floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = (Math.random() * 5 + 7) + 's';
+            item.style.animationDelay = (Math.random() * 5) + 's';
+            item.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            container.appendChild(item);
         }
     </script>
 </body>
