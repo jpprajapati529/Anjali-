@@ -7,14 +7,12 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>For You 🌷</title>
     <style>
-        /* Ensures padding doesn't push the container off-center */
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            /* Gives your S23 20px of breathing room, but expands for the iPhone 16 Pro's notch if needed */
             padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)) 20px;
             font-family: system-ui, '-apple-system', 'BlinkMacSystemFont', 'Georgia', serif;
             -webkit-font-smoothing: antialiased;
@@ -24,8 +22,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh; /* Fallback for older browsers */
-            min-height: 100dvh; /* Adapts to both Android Chrome and iOS Safari UI bars */
+            min-height: 100vh; 
+            min-height: 100dvh; 
             overflow-x: hidden;
         }
 
@@ -33,7 +31,7 @@
             background: rgba(255, 255, 255, 0.6);
             -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
-            padding: 40px;
+            padding: 40px 20px;
             border-radius: 28px;
             box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
             text-align: center;
@@ -52,6 +50,7 @@
         p {
             font-size: 1.1em;
             line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         .center-icon {
@@ -97,28 +96,116 @@
             100% { transform: translateY(-20dvh) scale(1.5); opacity: 0; }
         }
         
-        .gallery {
+        /* Interactive Boxes Styling */
+        .interactive-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 15px;
             justify-content: center;
-            margin-top: 30px;
+            width: 100%;
         }
 
-        .gallery img {
-            width: 105px;
-            height: 105px;
-            object-fit: cover;
-            border-radius: 18px;
+        .i-card {
+            width: 135px;
+            height: 135px;
+            background: rgba(255, 255, 255, 0.95);
             border: 2px solid #dc143c;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            -webkit-transition: -webkit-transform 0.2s ease;
-            transition: transform 0.2s ease;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-transition: -webkit-transform 0.15s ease;
+            transition: transform 0.15s ease;
         }
 
-        .gallery img:active {
-            -webkit-transform: scale(1.08) rotate(3deg);
-            transform: scale(1.08) rotate(3deg);
+        .i-card:active {
+            -webkit-transform: scale(0.92);
+            transform: scale(0.92);
+        }
+
+        .hint-text {
+            font-size: 0.75em;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* Box 1 */
+        #r-text {
+            color: #dc143c;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Box 2 (Orbit) */
+        .orbit-system {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+        }
+        .star {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 18px; height: 18px;
+            background: #ffb3c6;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px #ffb3c6;
+        }
+        .planet-orbit {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: 1px dashed #dc143c;
+            border-radius: 50%;
+            animation: spin 3s linear infinite;
+        }
+        .planet {
+            position: absolute;
+            top: -4px; left: 50%;
+            width: 8px; height: 8px;
+            background: #dc143c;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        .orbit-message {
+            font-size: 0.95em; 
+            color: #dc143c; 
+            font-weight: bold;
+            display: none;
+        }
+        .i-card.revealed .orbit-system { display: none; }
+        .i-card.revealed .orbit-message { display: block; }
+        .i-card.revealed .hint-text { display: none; }
+
+        /* Box 3 (Meter) */
+        #m-text {
+            color: #dc143c;
+            font-weight: bold;
+            font-size: 0.95em;
+        }
+        .meter-container {
+            width: 90%; 
+            height: 12px;
+            background: #ffe6e6;
+            border-radius: 10px;
+            border: 1px solid #dc143c;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .meter-fill {
+            height: 100%; 
+            width: 0%;
+            background: #dc143c;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
@@ -133,17 +220,37 @@
             You're the only one I'd <em>tulip</em> over for! I built this little corner of the internet just for us.
         </p>
         
-        <div class="gallery">
-            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+1" alt="Us">
-            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+2" alt="Us">
-            <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+3" alt="Us">
+        <div class="interactive-row">
+            
+            <div class="i-card" onclick="nextReason()">
+                <div id="r-text">Tap me! 💌</div>
+                <div class="hint-text">(Find out why)</div>
+            </div>
+
+            <div class="i-card" onclick="this.classList.toggle('revealed')">
+                <div class="orbit-system">
+                    <div class="star"></div>
+                    <div class="planet-orbit"><div class="planet"></div></div>
+                </div>
+                <div class="orbit-message">My world revolves around you! 🪐</div>
+                <div class="hint-text">(Tap the universe)</div>
+            </div>
+
+            <div class="i-card" onclick="fillMeter()">
+                <div id="m-text">Love Meter</div>
+                <div class="meter-container">
+                    <div class="meter-fill" id="m-fill"></div>
+                </div>
+                <div class="hint-text">(Tap to fill)</div>
+            </div>
+
         </div>
     </div>
 
     <script>
+        // Background Tulips
         const container = document.getElementById('floating-tulips');
         const floatSymbols = ['🌷', '🌷', '✨', '❤️']; 
-        
         for (let i = 0; i < 25; i++) {
             let item = document.createElement('div');
             item.classList.add('float-item');
@@ -153,6 +260,34 @@
             item.style.animationDelay = (Math.random() * 5) + 's';
             item.style.fontSize = (Math.random() * 20 + 15) + 'px';
             container.appendChild(item);
+        }
+
+        // Logic for Box 1 (Reason Generator)
+        const reasons = [
+            "Your beautiful smile 🌷", 
+            "You're my safe place ✨", 
+            "Your amazing laugh ❤️", 
+            "Everything about you 💖",
+            "Tap me! 💌" // Resets back to default
+        ];
+        let rIdx = 0;
+        function nextReason() {
+            rIdx = (rIdx + 1) % reasons.length;
+            document.getElementById('r-text').innerText = reasons[rIdx];
+        }
+
+        // Logic for Box 3 (Love Meter)
+        let meter = 0;
+        function fillMeter() {
+            meter += 34; // Fills in 3 taps
+            if(meter > 100) meter = 0; // Reset after it fills
+            
+            document.getElementById('m-fill').style.width = meter + '%';
+            const text = document.getElementById('m-text');
+            
+            if(meter === 0) text.innerText = "Love Meter";
+            else if(meter > 99) text.innerText = "Overflowing! ❤️";
+            else text.innerText = "Keep tapping!";
         }
     </script>
 </body>
