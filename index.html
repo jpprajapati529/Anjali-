@@ -2,50 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>For You 🌷</title>
     <style>
+        /* Ensures padding doesn't push the container off-center */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Georgia', serif;
-            /* Soft blush fading into a deep crimson */
+            /* Gives your S23 20px of breathing room, but expands for the iPhone 16 Pro's notch if needed */
+            padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)) 20px;
+            font-family: system-ui, '-apple-system', 'BlinkMacSystemFont', 'Georgia', serif;
+            -webkit-font-smoothing: antialiased;
             background: linear-gradient(135deg, #ffccd5 0%, #dc143c 100%);
             color: #4a4a4a;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 100vh; /* Fallback for older browsers */
+            min-height: 100dvh; /* Adapts to both Android Chrome and iOS Safari UI bars */
             overflow-x: hidden;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.6);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
             text-align: center;
             max-width: 600px;
-            margin: 20px;
+            width: 100%;
             z-index: 10;
         }
 
         h1 {
-            /* Crimson text */
             color: #dc143c;
-            font-size: 2.5em;
+            font-size: 2.2em;
             margin-bottom: 10px;
+            font-weight: 700;
         }
 
         p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             line-height: 1.6;
         }
 
         .center-icon {
             font-size: 60px;
+            -webkit-animation: gentle-bounce 2.5s infinite ease-in-out;
             animation: gentle-bounce 2.5s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes gentle-bounce {
+            0%, 100% { -webkit-transform: translateY(0); }
+            50% { -webkit-transform: translateY(-12px); }
         }
 
         @keyframes gentle-bounce {
@@ -53,7 +70,6 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* Floating background elements */
         .floating-tulips {
             position: fixed;
             top: 0;
@@ -67,34 +83,42 @@
         .float-item {
             position: absolute;
             opacity: 0.7;
+            -webkit-animation: floatUp 10s linear infinite;
             animation: floatUp 10s linear infinite;
         }
 
+        @-webkit-keyframes floatUp {
+            0% { -webkit-transform: translateY(100dvh) scale(0.5); opacity: 0.9; }
+            100% { -webkit-transform: translateY(-20dvh) scale(1.5); opacity: 0; }
+        }
+
         @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0.9; }
-            100% { transform: translateY(-20vh) scale(1.5); opacity: 0; }
+            0% { transform: translateY(100dvh) scale(0.5); opacity: 0.9; }
+            100% { transform: translateY(-20dvh) scale(1.5); opacity: 0; }
         }
         
         .gallery {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 12px;
             justify-content: center;
             margin-top: 30px;
         }
 
         .gallery img {
-            width: 120px;
-            height: 120px;
+            width: 105px;
+            height: 105px;
             object-fit: cover;
-            border-radius: 15px;
-            /* Crimson image borders */
-            border: 3px solid #dc143c;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
+            border-radius: 18px;
+            border: 2px solid #dc143c;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            -webkit-transition: -webkit-transform 0.2s ease;
+            transition: transform 0.2s ease;
         }
 
-        .gallery img:hover {
-            transform: scale(1.1) rotate(5deg);
+        .gallery img:active {
+            -webkit-transform: scale(1.08) rotate(3deg);
+            transform: scale(1.08) rotate(3deg);
         }
     </style>
 </head>
@@ -106,12 +130,10 @@
         <div class="center-icon">🌷</div>
         <h1>To My Favorite Person</h1>
         <p>
-            I built this little corner of the internet just for us. 
-            Like a crimson tulip, you bring so much beautiful color into my life!
+            You're the only one I'd <em>tulip</em> over for! I built this little corner of the internet just for us.
         </p>
         
         <div class="gallery">
-            <!-- Add links to your actual photos here -->
             <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+1" alt="Us">
             <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+2" alt="Us">
             <img src="https://via.placeholder.com/150/dc143c/ffffff?text=Photo+3" alt="Us">
@@ -119,7 +141,6 @@
     </div>
 
     <script>
-        // Generate floating tulips and sparkles
         const container = document.getElementById('floating-tulips');
         const floatSymbols = ['🌷', '🌷', '✨', '❤️']; 
         
