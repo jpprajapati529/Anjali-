@@ -1,294 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>For You 🌷</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>For My Favorite Person ❤️</title>
+  <style>
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      min-height: 100dvh; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #4a4a4a;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+    
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      padding: 2.5rem 1.5rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 88%;
+      max-width: 350px;
+      z-index: 10;
+      /* Smooth fade for transitioning between screens */
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    /* Hide all steps except the first one initially */
+    .step { display: none; }
+    #step-1 { display: block; }
+    
+    h1 { 
+      color: #ff4b2b; 
+      margin-top: 0;
+      margin-bottom: 0.5rem; 
+      font-size: 1.8rem; 
+      letter-spacing: -0.5px;
+    }
+    
+    p { 
+      font-size: 1.1rem; 
+      line-height: 1.5; 
+      color: #555; 
+      margin-bottom: 1.5rem;
+    }
+    
+    .btn-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
 
-        body {
-            margin: 0;
-            padding: max(20px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)) 20px;
-            font-family: system-ui, '-apple-system', 'BlinkMacSystemFont', 'Georgia', serif;
-            -webkit-font-smoothing: antialiased;
-            background: linear-gradient(135deg, #ffccd5 0%, #dc143c 100%);
-            color: #4a4a4a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; 
-            min-height: 100dvh; 
-            overflow-x: hidden;
-        }
+    .btn {
+      background: #ff4b2b;
+      color: white;
+      border: none;
+      padding: 16px 24px; 
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+    
+    .btn-no { background: #f0f0f0; color: #888; }
+    .btn:active { transform: scale(0.95); }
 
-        .container {
-            background: rgba(255, 255, 255, 0.6);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(20px);
-            padding: 40px 20px;
-            border-radius: 28px;
-            box-shadow: 0 10px 30px rgba(220, 20, 60, 0.3);
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            z-index: 10;
-        }
+    .cute-gif {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      pointer-events: none;
+    }
 
-        h1 {
-            color: #dc143c;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
+    .timer-box {
+      background: rgba(255, 75, 43, 0.1);
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 1rem;
+    }
 
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .center-icon {
-            font-size: 60px;
-            -webkit-animation: gentle-bounce 2.5s infinite ease-in-out;
-            animation: gentle-bounce 2.5s infinite ease-in-out;
-        }
-
-        @-webkit-keyframes gentle-bounce {
-            0%, 100% { -webkit-transform: translateY(0); }
-            50% { -webkit-transform: translateY(-12px); }
-        }
-
-        @keyframes gentle-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-        }
-
-        .floating-tulips {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .float-item {
-            position: absolute;
-            opacity: 0.7;
-            -webkit-animation: floatUp 10s linear infinite;
-            animation: floatUp 10s linear infinite;
-        }
-
-        @-webkit-keyframes floatUp {
-            0% { -webkit-transform: translateY(100dvh) scale(0.5); opacity: 0.9; }
-            100% { -webkit-transform: translateY(-20dvh) scale(1.5); opacity: 0; }
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100dvh) scale(0.5); opacity: 0.9; }
-            100% { transform: translateY(-20dvh) scale(1.5); opacity: 0; }
-        }
-        
-        /* Interactive Boxes Styling */
-        .interactive-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .i-card {
-            width: 135px;
-            height: 135px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid #dc143c;
-            border-radius: 20px;
-            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 12px;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-transition: -webkit-transform 0.15s ease;
-            transition: transform 0.15s ease;
-        }
-
-        .i-card:active {
-            -webkit-transform: scale(0.92);
-            transform: scale(0.92);
-        }
-
-        .hint-text {
-            font-size: 0.75em;
-            color: #888;
-            margin-top: 8px;
-            font-style: italic;
-        }
-
-        /* Box 1 */
-        #r-text {
-            color: #dc143c;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
-        /* Box 2 (Orbit) */
-        .orbit-system {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            margin-bottom: 5px;
-        }
-        .star {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 18px; height: 18px;
-            background: #ffb3c6;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px #ffb3c6;
-        }
-        .planet-orbit {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 1px dashed #dc143c;
-            border-radius: 50%;
-            animation: spin 3s linear infinite;
-        }
-        .planet {
-            position: absolute;
-            top: -4px; left: 50%;
-            width: 8px; height: 8px;
-            background: #dc143c;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        .orbit-message {
-            font-size: 0.95em; 
-            color: #dc143c; 
-            font-weight: bold;
-            display: none;
-        }
-        .i-card.revealed .orbit-system { display: none; }
-        .i-card.revealed .orbit-message { display: block; }
-        .i-card.revealed .hint-text { display: none; }
-
-        /* Box 3 (Meter) */
-        #m-text {
-            color: #dc143c;
-            font-weight: bold;
-            font-size: 0.95em;
-        }
-        .meter-container {
-            width: 90%; 
-            height: 12px;
-            background: #ffe6e6;
-            border-radius: 10px;
-            border: 1px solid #dc143c;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        .meter-fill {
-            height: 100%; 
-            width: 0%;
-            background: #dc143c;
-            transition: width 0.3s ease;
-        }
-    </style>
+    .timer-text {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff4b2b;
+      margin: 5px 0;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    
+    .heart {
+      position: absolute;
+      color: #ff4b2b;
+      opacity: 0.6;
+      animation: float 6s linear infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes float {
+      0% { transform: translate3d(0, 100dvh, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate3d(0, -10dvh, 0) rotate(360deg); opacity: 0; }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="floating-tulips" id="floating-tulips"></div>
+  <!-- STEP 1 -->
+  <div class="card step" id="step-1">
+    <h1>Hey Beautiful ✨</h1>
+    <p>I have a little secret to show you...</p>
+    <button class="btn" onclick="nextStep(1, 2)">What is it? 👀</button>
+  </div>
 
-    <div class="container">
-        <div class="center-icon">🌷</div>
-        <h1>To My Favorite Person</h1>
-        <p>
-            You're the only one I'd <em>tulip</em> over for! I built this little corner of the internet just for us.
-        </p>
-        
-        <div class="interactive-row">
-            
-            <div class="i-card" onclick="nextReason()">
-                <div id="r-text">Tap me! 💌</div>
-                <div class="hint-text">(Find out why)</div>
-            </div>
+  <!-- STEP 2 -->
+  <div class="card step" id="step-2">
+    <h1>Hold on! 🛑</h1>
+    <p>Before I show you, you have to make me a promise.</p>
+    <button class="btn" onclick="nextStep(2, 3)">Okay, what is it? 🤔</button>
+  </div>
 
-            <div class="i-card" onclick="this.classList.toggle('revealed')">
-                <div class="orbit-system">
-                    <div class="star"></div>
-                    <div class="planet-orbit"><div class="planet"></div></div>
-                </div>
-                <div class="orbit-message">My world revolves around you! 🪐</div>
-                <div class="hint-text">(Tap the universe)</div>
-            </div>
+  <!-- STEP 3 -->
+  <div class="card step" id="step-3">
+    <h1>Promise me... 🤞</h1>
+    <p>That you will smile when you see it.</p>
+    <button class="btn" onclick="nextStep(3, 4)">I promise! 💖</button>
+  </div>
 
-            <div class="i-card" onclick="fillMeter()">
-                <div id="m-text">Love Meter</div>
-                <div class="meter-container">
-                    <div class="meter-fill" id="m-fill"></div>
-                </div>
-                <div class="hint-text">(Tap to fill)</div>
-            </div>
-
-        </div>
+  <!-- STEP 4: The Growing Yes Game -->
+  <div class="card step" id="step-4">
+    <h1>Good! 🥰</h1>
+    <p>Now, for the real question... Will you be my favorite person forever?</p>
+    <div class="btn-container">
+      <button class="btn btn-yes" id="yes-btn" onclick="sayYes()">Yes! ❤️</button>
+      <button class="btn btn-no" id="no-btn" onclick="sayNo()">No 😢</button>
     </div>
+  </div>
 
-    <script>
-        // Background Tulips
-        const container = document.getElementById('floating-tulips');
-        const floatSymbols = ['🌷', '🌷', '✨', '❤️']; 
-        for (let i = 0; i < 25; i++) {
-            let item = document.createElement('div');
-            item.classList.add('float-item');
-            item.innerText = floatSymbols[Math.floor(Math.random() * floatSymbols.length)];
-            item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = (Math.random() * 5 + 7) + 's';
-            item.style.animationDelay = (Math.random() * 5) + 's';
-            item.style.fontSize = (Math.random() * 20 + 15) + 'px';
-            container.appendChild(item);
-        }
+  <!-- STEP 5: Final Reveal -->
+  <div class="card step" id="step-5">
+    <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Cute Hug" class="cute-gif">
+    <h1>I love you! 🥰</h1>
+    <p>We've been making amazing memories together for:</p>
+    <div class="timer-box">
+      <div class="timer-text" id="days">0 Days</div>
+      <div class="timer-text" id="hours">0 Hours</div>
+      <div class="timer-text" id="mins">0 Minutes</div>
+      <div class="timer-text" id="secs">0 Seconds</div>
+    </div>
+  </div>
 
-        // Logic for Box 1 (Reason Generator)
-        const reasons = [
-            "Your beautiful smile 🌷", 
-            "You're my safe place ✨", 
-            "Your amazing laugh ❤️", 
-            "Everything about you 💖",
-            "Tap me! 💌" // Resets back to default
-        ];
-        let rIdx = 0;
-        function nextReason() {
-            rIdx = (rIdx + 1) % reasons.length;
-            document.getElementById('r-text').innerText = reasons[rIdx];
-        }
+  <script>
+    // --- CUSTOMIZE YOUR DATE HERE ---
+    const anniversaryDate = new Date("2023-01-01T00:00:00").getTime(); 
+    
+    const noButtonTexts = [
+      "Are you sure? 🥺", 
+      "Think again! 💔", 
+      "Don't do this to me!", 
+      "Pookie please! 😭", 
+      "You're breaking my heart!", 
+      "I'll buy you food! 🍕",
+      "Okay, I'm not asking anymore. Say yes."
+    ];
 
-        // Logic for Box 3 (Love Meter)
-        let meter = 0;
-        function fillMeter() {
-            meter += 34; // Fills in 3 taps
-            if(meter > 100) meter = 0; // Reset after it fills
-            
-            document.getElementById('m-fill').style.width = meter + '%';
-            const text = document.getElementById('m-text');
-            
-            if(meter === 0) text.innerText = "Love Meter";
-            else if(meter > 99) text.innerText = "Overflowing! ❤️";
-            else text.innerText = "Keep tapping!";
-        }
-    </script>
+    // Function to move between anticipation screens
+    function nextStep(current, next) {
+      document.getElementById(`step-${current}`).style.display = 'none';
+      document.getElementById(`step-${next}`).style.display = 'block';
+      if (navigator.vibrate) navigator.vibrate(30);
+    }
+
+    let noClickCount = 0;
+    let yesButtonSize = 1;
+
+    function sayNo() {
+      const noBtn = document.getElementById('no-btn');
+      const yesBtn = document.getElementById('yes-btn');
+      
+      noBtn.innerText = noButtonTexts[Math.min(noClickCount, noButtonTexts.length - 1)];
+      noClickCount++;
+      yesButtonSize += 0.4;
+      yesBtn.style.transform = `scale(${yesButtonSize})`;
+      if (navigator.vibrate) navigator.vibrate(50);
+    }
+
+    function sayYes() {
+      nextStep(4, 5);
+      
+      setInterval(updateTimer, 1000);
+      updateTimer();
+
+      for(let i=0; i<40; i++) {
+        setTimeout(createHeart, i * 80);
+      }
+      if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+    }
+
+    function updateTimer() {
+      const now = new Date().getTime();
+      const difference = now - anniversaryDate;
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('days').innerText = days + " Days";
+      document.getElementById('hours').innerText = hours + " Hours";
+      document.getElementById('mins').innerText = minutes + " Minutes";
+      document.getElementById('secs').innerText = seconds + " Seconds";
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.style.fontSize = Math.random() * 20 + 12 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    
+    setInterval(createHeart, 450);
+  </script>
 </body>
 </html>
