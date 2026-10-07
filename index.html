@@ -78,8 +78,8 @@
             transform: scale(0.95);
         }
 
-        /* --- SHARED DASHBOARD STYLES --- */
-        .page-view {
+        /* --- MAIN DASHBOARD STYLES --- */
+        #page-main {
             display: none;
             flex-direction: column;
             gap: 16px;
@@ -168,17 +168,69 @@
         }
         .action-btn:active { transform: scale(0.92); background: #dc143c; color: white; }
 
-        /* --- HEART STATUS TILES PAGE --- */
+        /* --- HEART STATUS POP-UP MODAL --- */
+        #status-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+            background: rgba(248, 205, 218, 0.7); /* Soft pink tint */
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #fffafa 0%, #ffe6e6 100%);
+            border-radius: 28px;
+            padding: 35px 20px 25px 20px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 85dvh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Soft bounce effect */
+        }
+
+        /* The Close Cross */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(220, 20, 60, 0.1);
+            color: #dc143c;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .close-btn:active {
+            background: rgba(220, 20, 60, 0.2);
+            transform: scale(0.9);
+        }
+
+        /* Modal Grid Layout */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            margin-top: 10px;
         }
 
         .tile {
             background: rgba(255, 255, 255, 0.85);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 15px;
             text-align: center;
@@ -190,7 +242,7 @@
             align-items: center;
             min-height: 110px;
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: transform 0.2s ease;
         }
         
         .tile:active { transform: scale(0.95); }
@@ -206,7 +258,6 @@
             font-weight: 700;
         }
         
-        /* The default text state */
         .tile-value {
             font-size: 1em;
             color: #dc143c;
@@ -214,14 +265,12 @@
             line-height: 1.3;
         }
 
-        /* The hidden progress bar state */
         .tile-bar-wrap {
             display: none;
             width: 100%;
             margin-top: 5px;
         }
         
-        /* When clicked, hide text and show the bar */
         .tile.active .tile-value { display: none; }
         .tile.active .tile-bar-wrap {
             display: block;
@@ -251,7 +300,6 @@
             transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Special swinging animation for her mood tile */
         .bar-fill.swing {
             animation: swingBar 1.5s infinite alternate ease-in-out;
         }
@@ -265,20 +313,6 @@
             color: #dc143c;
             font-weight: 600;
         }
-
-        .back-btn {
-            background: transparent;
-            color: #dc143c;
-            border: 2px solid #dc143c;
-            border-radius: 20px;
-            padding: 12px;
-            width: 100%;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-        .back-btn:active { background: rgba(220, 20, 60, 0.1); }
 
         /* Floating Animation Elements */
         .float-item {
@@ -304,123 +338,116 @@
         </div>
     </div>
 
-    <!-- PAGE 1: Main Interactive Dashboard -->
-    <div id="page-main" class="page-view">
+    <!-- MAIN DASHBOARD -->
+    <div id="page-main">
         <div class="dash-header">
             <h2>LoveBoard OS 🌷</h2>
         </div>
 
-        <!-- The Check Status Button -->
-        <div class="widget status-check-btn" onclick="openStatusPage()">
+        <div class="widget status-check-btn" onclick="openStatusModal()">
             <div class="pulse-heart">💓</div>
             <h3>Now let's check your<br>sweet heart status</h3>
             <p class="hint-text">(Tap to open)</p>
         </div>
 
-        <!-- Romantic Terminal Widget -->
         <div class="widget terminal">
             <div class="term-header">root@my-heart:~# ./start_feelings.sh</div>
             <div id="term-text"></div><span class="cursor" id="cursor">_</span>
         </div>
 
-        <!-- Interactive Action Buttons -->
         <div class="widget action-widget">
             <button class="action-btn" onclick="deployHugs()">Deploy Hugs 🌷</button>
             <button class="action-btn" onclick="sendPing()">Ping Heart ❤️</button>
         </div>
     </div>
 
-    <!-- PAGE 2: The Heart Status Tiles -->
-    <div id="page-status" class="page-view">
-        <div class="dash-header">
-            <h2>Heart Diagnostics 🩺</h2>
-            <p class="hint-text" style="margin-bottom:10px;">(Tap the tiles below to scan)</p>
-        </div>
-
-        <div class="grid-container">
-            <!-- TILE 1: Protective Walls -->
-            <div class="tile full" onclick="toggleTile(this)">
-                <div class="tile-icon">🛡️</div>
-                <div class="tile-title">Protective Walls</div>
-                <div class="tile-value">Maximum (And totally respected)</div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
-                    <div class="bar-label">100% Active & Respected</div>
-                </div>
-            </div>
+    <!-- HEART STATUS POP-UP OVERLAY -->
+    <!-- Clicking the background closes it automatically -->
+    <div id="status-modal" onclick="if(event.target === this) closeStatusModal()">
+        <div class="modal-content">
+            <!-- The Close Button -->
+            <div class="close-btn" onclick="closeStatusModal()">✖</div>
             
-            <!-- TILE 2: Trust Level (Only fills a tiny bit to show patience) -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">⏳</div>
-                <div class="tile-title">Trust Level</div>
-                <div class="tile-value">Loading slowly...<br><span style="font-size:0.8em; color:#888;">(Take your time)</span></div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="15%"></div></div>
-                    <div class="bar-label">15% (No rush at all)</div>
-                </div>
-            </div>
-            
-            <!-- TILE 3: Healing -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">🌱</div>
-                <div class="tile-title">Healing</div>
-                <div class="tile-value">Doing amazing,<br>one day at a time</div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="75%"></div></div>
-                    <div class="bar-label">75% & Growing</div>
-                </div>
+            <div class="dash-header">
+                <h2>Heart Diagnostics 🩺</h2>
+                <p class="hint-text">(Tap the tiles below to scan)</p>
             </div>
 
-            <!-- TILE 4: Today's Mood (The swinging bar) -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">🎢</div>
-                <div class="tile-title">Today's Mood</div>
-                <div class="tile-value">Swinging gracefully<br><span style="font-size:0.8em; color:#888;">(Valid, whatever it is)</span></div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill swing"></div></div>
-                    <div class="bar-label">Valid, whatever it is.</div>
+            <div class="grid-container">
+                <div class="tile full" onclick="toggleTile(this)">
+                    <div class="tile-icon">🛡️</div>
+                    <div class="tile-title">Protective Walls</div>
+                    <div class="tile-value">Maximum (And totally respected)</div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
+                        <div class="bar-label">100% Active & Respected</div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- TILE 5: My Support -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">⚓</div>
-                <div class="tile-title">My Support</div>
-                <div class="tile-value">Always online.<br>Zero pressure.</div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
-                    <div class="bar-label">100% Unwavering</div>
+                
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">⏳</div>
+                    <div class="tile-title">Trust Level</div>
+                    <div class="tile-value">Loading slowly...<br><span style="font-size:0.8em; color:#888;">(Take your time)</span></div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="15%"></div></div>
+                        <div class="bar-label">15% (No rush at all)</div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- TILE 6: Smiles -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">😊</div>
-                <div class="tile-title">Your Smiles</div>
-                <div class="tile-value">Protected at<br>all costs</div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
-                    <div class="bar-label">100% Precious</div>
+                
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">🌱</div>
+                    <div class="tile-title">Healing</div>
+                    <div class="tile-value">Doing amazing,<br>one day at a time</div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="75%"></div></div>
+                        <div class="bar-label">75% & Growing</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- TILE 7: Laughs -->
-            <div class="tile" onclick="toggleTile(this)">
-                <div class="tile-icon">🎶</div>
-                <div class="tile-title">Your Laugh</div>
-                <div class="tile-value">Absolute music<br>to my ears</div>
-                <div class="tile-bar-wrap">
-                    <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
-                    <div class="bar-label">100% Loved</div>
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">🎢</div>
+                    <div class="tile-title">Today's Mood</div>
+                    <div class="tile-value">Swinging gracefully<br><span style="font-size:0.8em; color:#888;">(Valid, whatever it is)</span></div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill swing"></div></div>
+                        <div class="bar-label">Valid, whatever it is.</div>
+                    </div>
+                </div>
+
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">⚓</div>
+                    <div class="tile-title">My Support</div>
+                    <div class="tile-value">Always online.<br>Zero pressure.</div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
+                        <div class="bar-label">100% Unwavering</div>
+                    </div>
+                </div>
+
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">😊</div>
+                    <div class="tile-title">Your Smiles</div>
+                    <div class="tile-value">Protected at<br>all costs</div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
+                        <div class="bar-label">100% Precious</div>
+                    </div>
+                </div>
+
+                <div class="tile" onclick="toggleTile(this)">
+                    <div class="tile-icon">🎶</div>
+                    <div class="tile-title">Your Laugh</div>
+                    <div class="tile-value">Absolute music<br>to my ears</div>
+                    <div class="tile-bar-wrap">
+                        <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
+                        <div class="bar-label">100% Loved</div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <button class="back-btn" onclick="closeStatusPage()">← Back to Dashboard</button>
     </div>
 
     <script>
-        // Modal Gateway Logic
         function enterDashboard() {
             const gateway = document.getElementById('gateway');
             const pageMain = document.getElementById('page-main');
@@ -431,37 +458,34 @@
             setTimeout(() => {
                 gateway.style.display = 'none';
                 pageMain.style.display = 'flex';
-                void pageMain.offsetWidth; // trigger reflow
+                void pageMain.offsetWidth; 
                 pageMain.style.opacity = '1';
                 setTimeout(startTyping, 600);
             }, 600);
         }
 
-        // Page Navigation Logic
-        function openStatusPage() {
-            const pageMain = document.getElementById('page-main');
-            const pageStatus = document.getElementById('page-status');
+        // Modal Pop-Up Logic
+        function openStatusModal() {
+            const modal = document.getElementById('status-modal');
+            const modalContent = modal.querySelector('.modal-content');
             
-            pageMain.style.opacity = '0';
-            setTimeout(() => {
-                pageMain.style.display = 'none';
-                pageStatus.style.display = 'flex';
-                void pageStatus.offsetWidth;
-                pageStatus.style.opacity = '1';
-            }, 300);
+            modal.style.display = 'flex';
+            void modal.offsetWidth; // Force reflow
+            
+            modal.style.opacity = '1';
+            modalContent.style.transform = 'scale(1)';
         }
 
-        function closeStatusPage() {
-            const pageMain = document.getElementById('page-main');
-            const pageStatus = document.getElementById('page-status');
+        function closeStatusModal() {
+            const modal = document.getElementById('status-modal');
+            const modalContent = modal.querySelector('.modal-content');
             
-            pageStatus.style.opacity = '0';
+            modal.style.opacity = '0';
+            modalContent.style.transform = 'scale(0.9)';
+            
             setTimeout(() => {
-                pageStatus.style.display = 'none';
-                pageMain.style.display = 'flex';
-                void pageMain.offsetWidth;
-                pageMain.style.opacity = '1';
-            }, 300);
+                modal.style.display = 'none';
+            }, 300); // Matches CSS transition time
         }
 
         // Tile Toggle Logic
@@ -469,18 +493,15 @@
             const isActive = element.classList.contains('active');
             
             if (!isActive) {
-                // Open tile and animate bar
                 element.classList.add('active');
                 const fill = element.querySelector('.bar-fill');
                 
                 if (fill && !fill.classList.contains('swing')) {
-                    // Small delay so display block kicks in before CSS transition
                     setTimeout(() => {
                         fill.style.width = fill.getAttribute('data-width');
                     }, 50); 
                 }
             } else {
-                // Close tile and reset bar
                 element.classList.remove('active');
                 const fill = element.querySelector('.bar-fill');
                 
@@ -490,7 +511,6 @@
             }
         }
 
-        // Terminal Typing Effect
         const termLines = [
             "Initiating love_sequence.sh...",
             "Respecting firewalls...",
@@ -520,7 +540,6 @@
             }
         }
 
-        // Floating Animations
         function deployHugs() { createFloatingItems(['🌷', '✨', '💖'], 15); }
         function sendPing() { createFloatingItems(['❤️', '❤️‍🔥', '💓'], 8); }
 
