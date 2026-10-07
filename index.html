@@ -89,13 +89,20 @@
             font-weight: 800;
         }
 
-        /* Bear GIFs */
+        /* Local GIFs Styling */
         .gif-img {
             width: 160px;
             height: 160px;
-            object-fit: cover;
-            border-radius: 20px;
+            object-fit: contain;
             margin-bottom: 15px;
+        }
+        
+        /* Slightly smaller GIF for the poem page so it fits nicely */
+        .queen-gif {
+            width: 110px;
+            height: 110px;
+            object-fit: contain;
+            margin-bottom: 10px;
         }
 
         /* Gateway Buttons */
@@ -244,8 +251,10 @@
     <div id="gateway">
         <div class="promise-card">
             
-            <!-- Step 1: The Poem -->
+            <!-- Step 1: The Poem with Queen GIF -->
             <div id="step-poem">
+                <img src="queen.gif" alt="Queen" class="queen-gif">
+                
                 <p class="intro-text">I know how you feel and what you're going through, but for me...</p>
                 <div class="poem">
                     <p>You are <strong>Strong</strong>, <br><span>even with your tears.</span></p>
@@ -264,7 +273,7 @@
 
             <!-- Step 2: Clicks No (Pleading Bear) -->
             <div id="step-please" style="display: none;">
-                <img src="https://media.tenor.com/7s82kE-c3xEAAAAi/milk-and-mocha.gif" alt="Please" class="gif-img">
+                <img src="please.gif" alt="Please" class="gif-img">
                 <h2 class="hug-ask">Pleaseee? 🥺</h2>
                 <div class="btn-group">
                     <button class="promise-btn yes-btn" onclick="showHug()">Okay, Yes 💖</button>
@@ -273,7 +282,7 @@
 
             <!-- Step 3: Clicks Yes (Hugging Bear) -->
             <div id="step-hug" style="display: none;">
-                <img src="https://media.tenor.com/FowhXG24Q6MAAAAi/hug-milk-and-mocha.gif" alt="Hug" class="gif-img">
+                <img src="hug.gif" alt="Hug" class="gif-img">
                 <h2 class="hug-ask">Yayy! *tight hug* 🥰</h2>
                 <button class="promise-btn yes-btn" onclick="enterDashboard()">Continue ✨</button>
             </div>
