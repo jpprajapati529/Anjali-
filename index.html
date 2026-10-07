@@ -26,7 +26,7 @@
             justify-content: center;
         }
 
-        /* --- THE PROMISE MODAL --- */
+        /* --- THE GATEWAY / POEM MODAL --- */
         #gateway {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -36,47 +36,101 @@
             justify-content: center;
             z-index: 100;
             transition: opacity 0.6s ease, transform 0.6s ease;
+            padding: 20px;
         }
 
         .promise-card {
             background: #fffafa;
             border-radius: 32px;
-            padding: 40px 30px;
+            padding: 35px 25px;
             text-align: center;
-            width: 85%;
-            max-width: 380px;
+            width: 100%;
+            max-width: 400px;
             box-shadow: 0 15px 35px rgba(220, 20, 60, 0.15);
         }
 
-        .promise-card h1 {
+        /* Poem Typography */
+        .intro-text {
+            color: #666;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .poem {
+            text-align: left;
+            margin: 0 auto 25px auto;
+            width: max-content;
+            line-height: 1.5;
+        }
+        
+        .poem p {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        .poem strong {
+            color: #dc143c;
+            font-size: 1.15em;
+        }
+        
+        .poem span {
+            color: #888;
+            font-size: 0.9em;
+            margin-left: 20px;
+            display: block;
+        }
+
+        .hug-ask {
             color: #ff512f;
-            font-size: 2.2em;
-            margin-bottom: 15px;
+            font-size: 1.5em;
+            margin-bottom: 20px;
             font-weight: 800;
         }
 
-        .promise-card p {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 30px;
+        /* Bear GIFs */
+        .gif-img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        /* Gateway Buttons */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            width: 100%;
         }
 
         .promise-btn {
-            background: linear-gradient(to right, #ff512f, #dd2476);
-            color: white;
             border: none;
             border-radius: 30px;
-            padding: 16px 0;
-            width: 100%;
-            font-size: 1.25em;
+            padding: 15px 0;
+            font-size: 1.15em;
             font-weight: 700;
-            box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
             transition: transform 0.2s;
+            cursor: pointer;
+            width: 100%;
         }
 
-        .promise-btn:active {
-            transform: scale(0.95);
+        .yes-btn {
+            background: linear-gradient(to right, #ff512f, #dd2476);
+            color: white;
+            flex: 2;
+            box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
         }
+
+        .no-btn {
+            background: #fffafa;
+            color: #dc143c;
+            border: 2px solid #dc143c;
+            flex: 1;
+        }
+
+        .promise-btn:active { transform: scale(0.95); }
 
         /* --- MAIN DASHBOARD STYLES --- */
         #page-main {
@@ -89,12 +143,7 @@
             max-width: 500px;
         }
 
-        .dash-header {
-            text-align: center;
-            margin-bottom: 5px;
-            color: #dc143c;
-        }
-        
+        .dash-header { text-align: center; margin-bottom: 5px; color: #dc143c; }
         .dash-header h2 { font-size: 1.8em; }
 
         .widget {
@@ -107,54 +156,24 @@
             box-shadow: 0 8px 20px rgba(220, 20, 60, 0.1);
         }
 
-        /* Interactive Check Button Widget */
+        /* Interactive Check Button */
         .status-check-btn {
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-            background: rgba(255, 255, 255, 0.85);
-            border: 2px solid rgba(220, 20, 60, 0.3);
+            text-align: center; cursor: pointer; transition: transform 0.2s ease;
+            background: rgba(255, 255, 255, 0.85); border: 2px solid rgba(220, 20, 60, 0.3);
         }
         .status-check-btn:active { transform: scale(0.96); }
+        .status-check-btn h3 { color: #dc143c; font-size: 1.2em; margin: 10px 0 5px 0; }
         
-        .status-check-btn h3 {
-            color: #dc143c;
-            font-size: 1.2em;
-            margin: 10px 0 5px 0;
-        }
-        
-        .pulse-heart {
-            font-size: 40px;
-            display: inline-block;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
-
-        .hint-text {
-            font-size: 0.85em;
-            color: #888;
-            font-style: italic;
-        }
+        .pulse-heart { font-size: 40px; display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        .hint-text { font-size: 0.85em; color: #888; font-style: italic; }
 
         /* Terminal Widget */
         .terminal {
-            background: #1e1e1e;
-            color: #ffb3c6;
-            font-family: 'Courier New', Courier, monospace;
-            border: none;
-            min-height: 130px;
+            background: #1e1e1e; color: #ffb3c6; font-family: 'Courier New', monospace;
+            border: none; min-height: 130px;
         }
-        .term-header {
-            color: #888;
-            font-size: 0.85em;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
-        }
+        .term-header { color: #888; font-size: 0.85em; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
         #term-text { font-size: 0.9em; line-height: 1.5; white-space: pre-wrap; }
         .cursor { animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
@@ -170,175 +189,99 @@
 
         /* --- HEART STATUS POP-UP MODAL --- */
         #status-modal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
-            background: rgba(248, 205, 218, 0.7); /* Soft pink tint */
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            z-index: 200;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
+            background: rgba(248, 205, 218, 0.7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+            z-index: 200; align-items: center; justify-content: center; padding: 20px;
+            opacity: 0; transition: opacity 0.3s ease;
         }
 
         .modal-content {
-            background: linear-gradient(135deg, #fffafa 0%, #ffe6e6 100%);
-            border-radius: 28px;
-            padding: 35px 20px 25px 20px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 85dvh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.2);
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Soft bounce effect */
+            background: linear-gradient(135deg, #fffafa 0%, #ffe6e6 100%); border-radius: 28px;
+            padding: 35px 20px 25px 20px; width: 100%; max-width: 500px; max-height: 85dvh;
+            overflow-y: auto; position: relative; box-shadow: 0 15px 40px rgba(220, 20, 60, 0.2);
+            transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* The Close Cross */
         .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(220, 20, 60, 0.1);
-            color: #dc143c;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            position: absolute; top: 15px; right: 15px; background: rgba(220, 20, 60, 0.1);
+            color: #dc143c; width: 34px; height: 34px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2em; font-weight: bold;
+            cursor: pointer; transition: background 0.2s, transform 0.2s;
         }
-        .close-btn:active {
-            background: rgba(220, 20, 60, 0.2);
-            transform: scale(0.9);
-        }
+        .close-btn:active { background: rgba(220, 20, 60, 0.2); transform: scale(0.9); }
 
-        /* Modal Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 10px;
-        }
-
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
         .tile {
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid rgba(220, 20, 60, 0.15);
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 110px;
-            cursor: pointer;
-            transition: transform 0.2s ease;
+            background: rgba(255, 255, 255, 0.85); border-radius: 20px; padding: 15px;
+            text-align: center; border: 1px solid rgba(220, 20, 60, 0.15); box-shadow: 0 4px 15px rgba(220, 20, 60, 0.08);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 110px; cursor: pointer; transition: transform 0.2s ease;
         }
-        
         .tile:active { transform: scale(0.95); }
         .tile.full { grid-column: span 2; }
-
         .tile-icon { font-size: 24px; margin-bottom: 6px; }
-        .tile-title {
-            font-size: 0.75em;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
-        
-        .tile-value {
-            font-size: 1em;
-            color: #dc143c;
-            font-weight: 600;
-            line-height: 1.3;
-        }
+        .tile-title { font-size: 0.75em; color: #777; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 700; }
+        .tile-value { font-size: 1em; color: #dc143c; font-weight: 600; line-height: 1.3; }
 
-        .tile-bar-wrap {
-            display: none;
-            width: 100%;
-            margin-top: 5px;
-        }
-        
+        .tile-bar-wrap { display: none; width: 100%; margin-top: 5px; }
         .tile.active .tile-value { display: none; }
-        .tile.active .tile-bar-wrap {
-            display: block;
-            animation: quickFade 0.4s ease forwards;
-        }
+        .tile.active .tile-bar-wrap { display: block; animation: quickFade 0.4s ease forwards; }
+        @keyframes quickFade { 0% { opacity: 0; transform: translateY(5px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        @keyframes quickFade {
-            0% { opacity: 0; transform: translateY(5px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        .bar-bg { width: 100%; height: 12px; background: #ffe6e6; border-radius: 10px; border: 1px solid rgba(220, 20, 60, 0.3); overflow: hidden; margin-bottom: 6px; }
+        .bar-fill { height: 100%; background: #dc143c; width: 0%; border-radius: 8px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+        .bar-fill.swing { animation: swingBar 1.5s infinite alternate ease-in-out; }
+        @keyframes swingBar { 0% { width: 10%; background: #ffccd5; } 100% { width: 90%; background: #dc143c; } }
+        .bar-label { font-size: 0.85em; color: #dc143c; font-weight: 600; }
 
-        .bar-bg {
-            width: 100%;
-            height: 12px;
-            background: #ffe6e6;
-            border-radius: 10px;
-            border: 1px solid rgba(220, 20, 60, 0.3);
-            overflow: hidden;
-            margin-bottom: 6px;
-        }
-        
-        .bar-fill {
-            height: 100%;
-            background: #dc143c;
-            width: 0%;
-            border-radius: 8px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .bar-fill.swing {
-            animation: swingBar 1.5s infinite alternate ease-in-out;
-        }
-        @keyframes swingBar {
-            0% { width: 10%; background: #ffccd5; }
-            100% { width: 90%; background: #dc143c; }
-        }
-
-        .bar-label {
-            font-size: 0.85em;
-            color: #dc143c;
-            font-weight: 600;
-        }
-
-        /* Floating Animation Elements */
-        .float-item {
-            position: fixed;
-            pointer-events: none;
-            z-index: 50;
-            animation: floatUp 4s ease-in forwards;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
-        }
+        .float-item { position: fixed; pointer-events: none; z-index: 50; animation: floatUp 4s ease-in forwards; }
+        @keyframes floatUp { 0% { transform: translateY(0) scale(0.5); opacity: 1; } 100% { transform: translateY(-100vh) scale(1.5); opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- Startup Promise Modal -->
+    <!-- 1. STARTUP GATEWAY (Poem & Hug Ask) -->
     <div id="gateway">
         <div class="promise-card">
-            <h1>Promise me... 🤞</h1>
-            <p>That you will smile when you see it.</p>
-            <button class="promise-btn" onclick="enterDashboard()">I promise! 💖</button>
+            
+            <!-- Step 1: The Poem -->
+            <div id="step-poem">
+                <p class="intro-text">I know how you feel and what you're going through, but for me...</p>
+                <div class="poem">
+                    <p>You are <strong>Strong</strong>, <br><span>even with your tears.</span></p>
+                    <p>You are <strong>Worthy</strong>, <br><span>even with your pain.</span></p>
+                    <p>You are <strong>Beautiful</strong>, <br><span>even with your scars.</span></p>
+                    <p>You are <strong>Loved</strong>, <br><span>even with your past.</span></p>
+                    <p>You are <strong>Enough</strong>, <br><span>just as you are.</span></p>
+                </div>
+                
+                <h2 class="hug-ask">Can I please hug you? 🥺</h2>
+                <div class="btn-group">
+                    <button class="promise-btn yes-btn" onclick="showHug()">Yes 💖</button>
+                    <button class="promise-btn no-btn" onclick="showPlease()">No</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Clicks No (Pleading Bear) -->
+            <div id="step-please" style="display: none;">
+                <img src="https://media.tenor.com/7s82kE-c3xEAAAAi/milk-and-mocha.gif" alt="Please" class="gif-img">
+                <h2 class="hug-ask">Pleaseee? 🥺</h2>
+                <div class="btn-group">
+                    <button class="promise-btn yes-btn" onclick="showHug()">Okay, Yes 💖</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Clicks Yes (Hugging Bear) -->
+            <div id="step-hug" style="display: none;">
+                <img src="https://media.tenor.com/FowhXG24Q6MAAAAi/hug-milk-and-mocha.gif" alt="Hug" class="gif-img">
+                <h2 class="hug-ask">Yayy! *tight hug* 🥰</h2>
+                <button class="promise-btn yes-btn" onclick="enterDashboard()">Continue ✨</button>
+            </div>
+
         </div>
     </div>
 
-    <!-- MAIN DASHBOARD -->
+    <!-- 2. MAIN DASHBOARD -->
     <div id="page-main">
         <div class="dash-header">
             <h2>LoveBoard OS 🌷</h2>
@@ -361,11 +304,9 @@
         </div>
     </div>
 
-    <!-- HEART STATUS POP-UP OVERLAY -->
-    <!-- Clicking the background closes it automatically -->
+    <!-- 3. HEART STATUS POP-UP OVERLAY -->
     <div id="status-modal" onclick="if(event.target === this) closeStatusModal()">
         <div class="modal-content">
-            <!-- The Close Button -->
             <div class="close-btn" onclick="closeStatusModal()">✖</div>
             
             <div class="dash-header">
@@ -448,6 +389,19 @@
     </div>
 
     <script>
+        // --- POEM & HUG LOGIC ---
+        function showPlease() {
+            document.getElementById('step-poem').style.display = 'none';
+            document.getElementById('step-please').style.display = 'block';
+        }
+
+        function showHug() {
+            document.getElementById('step-poem').style.display = 'none';
+            document.getElementById('step-please').style.display = 'none';
+            document.getElementById('step-hug').style.display = 'block';
+        }
+
+        // --- DASHBOARD LOGIC ---
         function enterDashboard() {
             const gateway = document.getElementById('gateway');
             const pageMain = document.getElementById('page-main');
@@ -464,14 +418,11 @@
             }, 600);
         }
 
-        // Modal Pop-Up Logic
         function openStatusModal() {
             const modal = document.getElementById('status-modal');
             const modalContent = modal.querySelector('.modal-content');
-            
             modal.style.display = 'flex';
-            void modal.offsetWidth; // Force reflow
-            
+            void modal.offsetWidth;
             modal.style.opacity = '1';
             modalContent.style.transform = 'scale(1)';
         }
@@ -479,32 +430,22 @@
         function closeStatusModal() {
             const modal = document.getElementById('status-modal');
             const modalContent = modal.querySelector('.modal-content');
-            
             modal.style.opacity = '0';
             modalContent.style.transform = 'scale(0.9)';
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300); // Matches CSS transition time
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
 
-        // Tile Toggle Logic
         function toggleTile(element) {
             const isActive = element.classList.contains('active');
-            
             if (!isActive) {
                 element.classList.add('active');
                 const fill = element.querySelector('.bar-fill');
-                
                 if (fill && !fill.classList.contains('swing')) {
-                    setTimeout(() => {
-                        fill.style.width = fill.getAttribute('data-width');
-                    }, 50); 
+                    setTimeout(() => { fill.style.width = fill.getAttribute('data-width'); }, 50); 
                 }
             } else {
                 element.classList.remove('active');
                 const fill = element.querySelector('.bar-fill');
-                
                 if (fill && !fill.classList.contains('swing')) {
                     fill.style.width = '0%';
                 }
@@ -519,21 +460,16 @@
             "Message: You are amazing."
         ];
         
-        let lineIdx = 0;
-        let charIdx = 0;
-        const termText = document.getElementById('term-text');
+        let lineIdx = 0; let charIdx = 0; const termText = document.getElementById('term-text');
 
         function startTyping() {
             if (lineIdx < termLines.length) {
                 if (charIdx < termLines[lineIdx].length) {
                     termText.innerHTML += termLines[lineIdx].charAt(charIdx);
-                    charIdx++;
-                    setTimeout(startTyping, 40);
+                    charIdx++; setTimeout(startTyping, 40);
                 } else {
                     termText.innerHTML += "<br>> ";
-                    lineIdx++;
-                    charIdx = 0;
-                    setTimeout(startTyping, 400);
+                    lineIdx++; charIdx = 0; setTimeout(startTyping, 400);
                 }
             } else {
                 document.getElementById('cursor').style.display = 'inline';
