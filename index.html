@@ -97,7 +97,6 @@
             margin-bottom: 15px;
         }
         
-        /* Slightly smaller GIF for the poem page so it fits nicely */
         .queen-gif {
             width: 110px;
             height: 110px;
@@ -139,7 +138,7 @@
 
         .promise-btn:active { transform: scale(0.95); }
 
-        /* --- MAIN DASHBOARD STYLES --- */
+        /* --- MAIN PAGE STYLES --- */
         #page-main {
             display: none;
             flex-direction: column;
@@ -175,14 +174,24 @@
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
         .hint-text { font-size: 0.85em; color: #888; font-style: italic; }
 
-        /* Terminal Widget */
-        .terminal {
-            background: #1e1e1e; color: #ffb3c6; font-family: 'Courier New', monospace;
-            border: none; min-height: 130px;
+        /* Soft Love Note Widget (Replaces Terminal) */
+        .love-note {
+            background: #fffafa; 
+            color: #4a4a4a; 
+            border: 1px dashed rgba(220, 20, 60, 0.4);
+            min-height: 130px;
+            font-size: 1.05em;
         }
-        .term-header { color: #888; font-size: 0.85em; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        #term-text { font-size: 0.9em; line-height: 1.5; white-space: pre-wrap; }
-        .cursor { animation: blink 1s step-end infinite; }
+        .note-header { 
+            color: #dc143c; 
+            font-size: 0.9em; 
+            margin-bottom: 10px; 
+            border-bottom: 1px solid rgba(220, 20, 60, 0.2); 
+            padding-bottom: 5px; 
+            font-weight: bold;
+        }
+        #typewriter-text { font-size: 1em; line-height: 1.6; white-space: pre-wrap; font-style: italic; }
+        .cursor { color: #dc143c; animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
         /* Action Widget */
@@ -247,21 +256,19 @@
 </head>
 <body>
 
-    <!-- 1. STARTUP GATEWAY (Poem & Hug Ask) -->
+    <!-- 1. STARTUP GATEWAY (Bright Escape Poem & Hug Ask) -->
     <div id="gateway">
         <div class="promise-card">
             
-            <!-- Step 1: The Poem with Queen GIF -->
             <div id="step-poem">
                 <img src="queen.gif" alt="Queen" class="queen-gif">
                 
-                <p class="intro-text">I know how you feel and what you're going through, but for me...</p>
+                <p class="intro-text">Just a quick daily reminder that...</p>
                 <div class="poem">
-                    <p>You are <strong>Strong</strong>, <br><span>even with your tears.</span></p>
-                    <p>You are <strong>Worthy</strong>, <br><span>even with your pain.</span></p>
-                    <p>You are <strong>Beautiful</strong>, <br><span>even with your scars.</span></p>
-                    <p>You are <strong>Loved</strong>, <br><span>even with your past.</span></p>
-                    <p>You are <strong>Enough</strong>, <br><span>just as you are.</span></p>
+                    <p>You are <strong>Un-bear-ably</strong>, <br><span>cute (it's actually unfair). 🐻</span></p>
+                    <p>You bring <strong>Color</strong>, <br><span>like crimson painting the sky. 🎨</span></p>
+                    <p>You are my favorite <strong>Notification</strong>, <br><span>lighting up my screen. 📱</span></p>
+                    <p>I'd <strong>Tulip</strong> over, <br><span>just to see you smile. 🌷</span></p>
                 </div>
                 
                 <h2 class="hug-ask">Can I please hug you? 🥺</h2>
@@ -271,7 +278,9 @@
                 </div>
             </div>
 
-            <!-- Step 2: Clicks No (Pleading Bear) -->
+            
+
+            <!-- Clicks No -->
             <div id="step-please" style="display: none;">
                 <img src="please.gif" alt="Please" class="gif-img">
                 <h2 class="hug-ask">Pleaseee? 🥺</h2>
@@ -280,7 +289,7 @@
                 </div>
             </div>
 
-            <!-- Step 3: Clicks Yes (Hugging Bear) -->
+            <!-- Clicks Yes -->
             <div id="step-hug" style="display: none;">
                 <img src="hug.gif" alt="Hug" class="gif-img">
                 <h2 class="hug-ask">Yayy! *tight hug* 🥰</h2>
@@ -290,26 +299,27 @@
         </div>
     </div>
 
-    <!-- 2. MAIN DASHBOARD -->
+    <!-- 2. MAIN PAGE (Soft & Sweet) -->
     <div id="page-main">
         <div class="dash-header">
-            <h2>LoveBoard OS 🌷</h2>
+            <h2>A Little Space for You 🌷</h2>
         </div>
 
         <div class="widget status-check-btn" onclick="openStatusModal()">
             <div class="pulse-heart">💓</div>
-            <h3>Now let's check your<br>sweet heart status</h3>
+            <h3>Let's check on<br>your heart today</h3>
             <p class="hint-text">(Tap to open)</p>
         </div>
 
-        <div class="widget terminal">
-            <div class="term-header">root@my-heart:~# ./start_feelings.sh</div>
-            <div id="term-text"></div><span class="cursor" id="cursor">_</span>
+        <!-- The Typewriter Love Note -->
+        <div class="widget love-note">
+            <div class="note-header">A little note for you... 💌</div>
+            <div id="typewriter-text"></div><span class="cursor" id="cursor">|</span>
         </div>
 
         <div class="widget action-widget">
-            <button class="action-btn" onclick="deployHugs()">Deploy Hugs 🌷</button>
-            <button class="action-btn" onclick="sendPing()">Ping Heart ❤️</button>
+            <button class="action-btn" onclick="sendHugs()">Send Hugs 🧸</button>
+            <button class="action-btn" onclick="sendLove()">Shower with Love 🌷</button>
         </div>
     </div>
 
@@ -319,25 +329,25 @@
             <div class="close-btn" onclick="closeStatusModal()">✖</div>
             
             <div class="dash-header">
-                <h2>Heart Diagnostics 🩺</h2>
-                <p class="hint-text">(Tap the tiles below to scan)</p>
+                <h2>Checking In 🤍</h2>
+                <p class="hint-text">(Tap the tiles below)</p>
             </div>
 
             <div class="grid-container">
                 <div class="tile full" onclick="toggleTile(this)">
                     <div class="tile-icon">🛡️</div>
-                    <div class="tile-title">Protective Walls</div>
+                    <div class="tile-title">Protective Layer</div>
                     <div class="tile-value">Maximum (And totally respected)</div>
                     <div class="tile-bar-wrap">
                         <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
-                        <div class="bar-label">100% Active & Respected</div>
+                        <div class="bar-label">100% Safe & Respected</div>
                     </div>
                 </div>
                 
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">⏳</div>
-                    <div class="tile-title">Trust Level</div>
-                    <div class="tile-value">Loading slowly...<br><span style="font-size:0.8em; color:#888;">(Take your time)</span></div>
+                    <div class="tile-title">Our Pace</div>
+                    <div class="tile-value">Taking it slow...<br><span style="font-size:0.8em; color:#888;">(Take your time)</span></div>
                     <div class="tile-bar-wrap">
                         <div class="bar-bg"><div class="bar-fill" data-width="15%"></div></div>
                         <div class="bar-label">15% (No rush at all)</div>
@@ -367,7 +377,7 @@
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">⚓</div>
                     <div class="tile-title">My Support</div>
-                    <div class="tile-value">Always online.<br>Zero pressure.</div>
+                    <div class="tile-value">Always here.<br>Zero pressure.</div>
                     <div class="tile-bar-wrap">
                         <div class="bar-bg"><div class="bar-fill" data-width="100%"></div></div>
                         <div class="bar-label">100% Unwavering</div>
@@ -461,32 +471,33 @@
             }
         }
 
-        const termLines = [
-            "Initiating love_sequence.sh...",
-            "Respecting firewalls...",
-            "Loading infinite patience...",
-            "Status: 100% Here for you.",
-            "Message: You are amazing."
+        // The Sweet Love Note lines
+        const noteLines = [
+            "Hey you...",
+            "Just a little reminder that I'm always here.",
+            "No rushing, no pressure.",
+            "Just me, completely amazed by you.",
+            "Take all the time you need. ❤️"
         ];
         
-        let lineIdx = 0; let charIdx = 0; const termText = document.getElementById('term-text');
+        let lineIdx = 0; let charIdx = 0; const termText = document.getElementById('typewriter-text');
 
         function startTyping() {
-            if (lineIdx < termLines.length) {
-                if (charIdx < termLines[lineIdx].length) {
-                    termText.innerHTML += termLines[lineIdx].charAt(charIdx);
-                    charIdx++; setTimeout(startTyping, 40);
+            if (lineIdx < noteLines.length) {
+                if (charIdx < noteLines[lineIdx].length) {
+                    termText.innerHTML += noteLines[lineIdx].charAt(charIdx);
+                    charIdx++; setTimeout(startTyping, 50); // Slightly slower typing for a romantic feel
                 } else {
-                    termText.innerHTML += "<br>> ";
-                    lineIdx++; charIdx = 0; setTimeout(startTyping, 400);
+                    termText.innerHTML += "<br><br>";
+                    lineIdx++; charIdx = 0; setTimeout(startTyping, 600);
                 }
             } else {
                 document.getElementById('cursor').style.display = 'inline';
             }
         }
 
-        function deployHugs() { createFloatingItems(['🌷', '✨', '💖'], 15); }
-        function sendPing() { createFloatingItems(['❤️', '❤️‍🔥', '💓'], 8); }
+        function sendHugs() { createFloatingItems(['🧸', '🤗', '✨'], 12); }
+        function sendLove() { createFloatingItems(['🌷', '❤️', '💖'], 15); }
 
         function createFloatingItems(symbols, count) {
             for (let i = 0; i < count; i++) {
@@ -502,5 +513,6 @@
             }
         }
     </script>
+
 </body>
-</html>
+</html> 
