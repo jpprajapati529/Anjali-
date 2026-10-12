@@ -47,119 +47,49 @@
             width: 100%;
             max-width: 400px;
             box-shadow: 0 15px 35px rgba(220, 20, 60, 0.15);
+            position: relative;
         }
 
-        /* Poem Typography */
-        .intro-text {
-            color: #666;
-            font-size: 1.05em;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
+        .intro-text { color: #666; font-size: 1.05em; margin-bottom: 20px; font-style: italic; }
         
-        .poem {
-            text-align: left;
-            margin: 0 auto 25px auto;
-            width: max-content;
-            line-height: 1.5;
-        }
-        
-        .poem p {
-            margin-bottom: 12px;
-            font-size: 1.1em;
-            color: #555;
-        }
-        
-        .poem strong {
-            color: #dc143c;
-            font-size: 1.15em;
-        }
-        
-        .poem span {
-            color: #888;
-            font-size: 0.9em;
-            margin-left: 20px;
-            display: block;
-        }
+        .poem { text-align: left; margin: 0 auto 25px auto; width: max-content; line-height: 1.5; }
+        .poem p { margin-bottom: 12px; font-size: 1.1em; color: #555; }
+        .poem strong { color: #dc143c; font-size: 1.15em; }
+        .poem span { color: #888; font-size: 0.9em; margin-left: 20px; display: block; }
 
-        .hug-ask {
-            color: #ff512f;
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
+        .hug-ask { color: #ff512f; font-size: 1.5em; margin-bottom: 20px; font-weight: 800; }
 
-        /* Local GIFs Styling */
-        .gif-img {
-            width: 160px;
-            height: 160px;
-            object-fit: contain;
-            margin-bottom: 15px;
-        }
+        .gif-img { width: 160px; height: 160px; object-fit: contain; margin-bottom: 15px; }
+        .queen-gif { width: 110px; height: 110px; object-fit: contain; margin-bottom: 10px; }
+
+        .btn-group { display: flex; gap: 12px; width: 100%; justify-content: center; }
         
-        .queen-gif {
-            width: 110px;
-            height: 110px;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
-
-        /* Gateway Buttons */
-        .btn-group {
-            display: flex;
-            gap: 12px;
-            width: 100%;
-        }
-
         .promise-btn {
-            border: none;
-            border-radius: 30px;
-            padding: 15px 0;
-            font-size: 1.15em;
-            font-weight: 700;
-            transition: transform 0.2s;
-            cursor: pointer;
-            width: 100%;
+            border: none; border-radius: 30px; padding: 15px 0; font-size: 1.15em;
+            font-weight: 700; transition: transform 0.2s; cursor: pointer; width: 100%;
         }
 
         .yes-btn {
-            background: linear-gradient(to right, #ff512f, #dd2476);
-            color: white;
-            flex: 2;
-            box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
+            background: linear-gradient(to right, #ff512f, #dd2476); color: white;
+            flex: 2; box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35);
         }
 
-        .no-btn {
-            background: #fffafa;
-            color: #dc143c;
-            border: 2px solid #dc143c;
-            flex: 1;
-        }
-
+        .no-btn { background: #fffafa; color: #dc143c; border: 2px solid #dc143c; flex: 1; }
         .promise-btn:active { transform: scale(0.95); }
 
-        /* --- MAIN PAGE STYLES --- */
-        #page-main {
-            display: none;
-            flex-direction: column;
-            gap: 16px;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            width: 100%;
-            max-width: 500px;
+        /* --- SHARED PAGE STYLES --- */
+        .page-view {
+            display: none; flex-direction: column; gap: 16px; opacity: 0;
+            transition: opacity 0.5s ease; width: 100%; max-width: 500px;
         }
 
         .dash-header { text-align: center; margin-bottom: 5px; color: #dc143c; }
         .dash-header h2 { font-size: 1.8em; }
 
         .widget {
-            background: rgba(255, 255, 255, 0.7);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 20px rgba(220, 20, 60, 0.1);
+            background: rgba(255, 255, 255, 0.7); -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px); border-radius: 24px; padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 20px rgba(220, 20, 60, 0.1);
         }
 
         /* Interactive Check Button */
@@ -174,27 +104,20 @@
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
         .hint-text { font-size: 0.85em; color: #888; font-style: italic; }
 
-        /* Soft Love Note Widget (Replaces Terminal) */
+        /* Soft Love Note Widget */
         .love-note {
-            background: #fffafa; 
-            color: #4a4a4a; 
-            border: 1px dashed rgba(220, 20, 60, 0.4);
-            min-height: 130px;
-            font-size: 1.05em;
+            background: #fffafa; color: #4a4a4a; border: 1px dashed rgba(220, 20, 60, 0.4);
+            min-height: 130px; font-size: 1.05em;
         }
         .note-header { 
-            color: #dc143c; 
-            font-size: 0.9em; 
-            margin-bottom: 10px; 
-            border-bottom: 1px solid rgba(220, 20, 60, 0.2); 
-            padding-bottom: 5px; 
-            font-weight: bold;
+            color: #dc143c; font-size: 0.9em; margin-bottom: 10px; 
+            border-bottom: 1px solid rgba(220, 20, 60, 0.2); padding-bottom: 5px; font-weight: bold;
         }
         #typewriter-text { font-size: 1em; line-height: 1.6; white-space: pre-wrap; font-style: italic; }
         .cursor { color: #dc143c; animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Action Widget */
+        /* Action Buttons */
         .action-widget { display: flex; justify-content: space-between; gap: 10px; }
         .action-btn {
             flex: 1; background: rgba(255, 255, 255, 0.9); color: #dc143c;
@@ -203,47 +126,88 @@
         }
         .action-btn:active { transform: scale(0.92); background: #dc143c; color: white; }
 
-        /* --- HEART STATUS POP-UP MODAL --- */
+        /* Special Ask Button */
+        .ask-btn-widget {
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            color: white; text-align: center; border-radius: 24px; padding: 20px;
+            box-shadow: 0 8px 20px rgba(221, 36, 118, 0.35); font-size: 1.2em;
+            font-weight: bold; cursor: pointer; transition: transform 0.2s;
+        }
+        .ask-btn-widget:active { transform: scale(0.96); }
+
+        /* --- THE "ASK OUT" FLOW (INSPIRED BY VIDEO) --- */
+        #page-ask { align-items: center; justify-content: center; min-height: 80vh; }
+        
+        .step-container { display: none; width: 100%; text-align: center; }
+        
+        /* Step 1: The Question */
+        .runaway-container {
+            position: relative; width: 100%; height: 180px; margin-top: 30px;
+        }
+        .runaway-btn {
+            position: absolute; width: 120px; left: calc(50% + 10px); top: 20px;
+        }
+        .stay-btn {
+            position: absolute; width: 140px; left: calc(50% - 150px); top: 20px;
+        }
+
+        /* Step 2: Food Grid */
+        .food-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px;
+        }
+        .food-item {
+            background: white; border: 2px solid rgba(220, 20, 60, 0.2); border-radius: 18px;
+            padding: 15px 5px; font-size: 2em; text-align: center; cursor: pointer;
+            transition: transform 0.2s, border 0.2s;
+        }
+        .food-item:active { transform: scale(0.9); border-color: #dc143c; }
+        .food-label { font-size: 0.35em; font-weight: bold; color: #555; display: block; margin-top: 5px; font-family: sans-serif;}
+
+        /* Step 3: Fake Invoice */
+        .invoice-card {
+            background: white; border-radius: 20px; padding: 30px 20px; margin-top: 20px;
+            border: 1px solid #eee; text-align: left; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .invoice-header { color: #888; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; text-align: center;}
+        .invoice-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1.1em; color: #444; }
+        .invoice-total { border-top: 2px dashed #ddd; padding-top: 15px; margin-top: 5px; font-weight: bold; font-size: 1.3em; color: #dc143c;}
+        .pay-btn {
+            background: #000; color: #fff; width: 100%; border-radius: 20px; padding: 15px;
+            font-size: 1.1em; font-weight: bold; margin-top: 25px; border: none; cursor: pointer;
+        }
+        .pay-btn:active { transform: scale(0.96); }
+
+        /* --- STATUS MODAL --- */
         #status-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh;
             background: rgba(248, 205, 218, 0.7); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-            z-index: 200; align-items: center; justify-content: center; padding: 20px;
-            opacity: 0; transition: opacity 0.3s ease;
+            z-index: 200; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease;
         }
-
         .modal-content {
             background: linear-gradient(135deg, #fffafa 0%, #ffe6e6 100%); border-radius: 28px;
             padding: 35px 20px 25px 20px; width: 100%; max-width: 500px; max-height: 85dvh;
             overflow-y: auto; position: relative; box-shadow: 0 15px 40px rgba(220, 20, 60, 0.2);
             transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .close-btn {
-            position: absolute; top: 15px; right: 15px; background: rgba(220, 20, 60, 0.1);
-            color: #dc143c; width: 34px; height: 34px; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 1.2em; font-weight: bold;
-            cursor: pointer; transition: background 0.2s, transform 0.2s;
+            position: absolute; top: 15px; right: 15px; background: rgba(220, 20, 60, 0.1); color: #dc143c; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2em; font-weight: bold; cursor: pointer; transition: background 0.2s, transform 0.2s;
         }
         .close-btn:active { background: rgba(220, 20, 60, 0.2); transform: scale(0.9); }
 
+        /* Tiles */
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
         .tile {
-            background: rgba(255, 255, 255, 0.85); border-radius: 20px; padding: 15px;
-            text-align: center; border: 1px solid rgba(220, 20, 60, 0.15); box-shadow: 0 4px 15px rgba(220, 20, 60, 0.08);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            min-height: 110px; cursor: pointer; transition: transform 0.2s ease;
+            background: rgba(255, 255, 255, 0.85); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid rgba(220, 20, 60, 0.15); box-shadow: 0 4px 15px rgba(220, 20, 60, 0.08); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 110px; cursor: pointer; transition: transform 0.2s ease;
         }
         .tile:active { transform: scale(0.95); }
         .tile.full { grid-column: span 2; }
         .tile-icon { font-size: 24px; margin-bottom: 6px; }
         .tile-title { font-size: 0.75em; color: #777; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; font-weight: 700; }
         .tile-value { font-size: 1em; color: #dc143c; font-weight: 600; line-height: 1.3; }
-
         .tile-bar-wrap { display: none; width: 100%; margin-top: 5px; }
         .tile.active .tile-value { display: none; }
         .tile.active .tile-bar-wrap { display: block; animation: quickFade 0.4s ease forwards; }
         @keyframes quickFade { 0% { opacity: 0; transform: translateY(5px); } 100% { opacity: 1; transform: translateY(0); } }
-
         .bar-bg { width: 100%; height: 12px; background: #ffe6e6; border-radius: 10px; border: 1px solid rgba(220, 20, 60, 0.3); overflow: hidden; margin-bottom: 6px; }
         .bar-fill { height: 100%; background: #dc143c; width: 0%; border-radius: 8px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
         .bar-fill.swing { animation: swingBar 1.5s infinite alternate ease-in-out; }
@@ -256,21 +220,18 @@
 </head>
 <body>
 
-    <!-- 1. STARTUP GATEWAY (Bright Escape Poem & Hug Ask) -->
+    <!-- 1. STARTUP GATEWAY -->
     <div id="gateway">
         <div class="promise-card">
-            
             <div id="step-poem">
                 <img src="queen.gif" alt="Queen" class="queen-gif">
-                
-                <p class="intro-text">Just a quick daily reminder that...</p>
+                <p class="intro-text">Just dropping in to remind you of a few absolute facts...</p>
                 <div class="poem">
-                    <p>You are <strong>Un-bear-ably</strong>, <br><span>cute (it's actually unfair). 🐻</span></p>
-                    <p>You bring <strong>Color</strong>, <br><span>like crimson painting the sky. 🎨</span></p>
-                    <p>You are my favorite <strong>Notification</strong>, <br><span>lighting up my screen. 📱</span></p>
-                    <p>I'd <strong>Tulip</strong> over, <br><span>just to see you smile. 🌷</span></p>
+                    <p>You are <strong>Brighter</strong>, <br><span>than a whole field of tulips. 🌷</span></p>
+                    <p>Your smile is <strong>Magic</strong>, <br><span>and my absolute favorite view. ✨</span></p>
+                    <p>Your laugh is <strong>Music</strong>, <br><span>and the best sound in the world. 🎶</span></p>
+                    <p>You are <strong>Wonderful</strong>, <br><span>just for being exactly who you are. 💖</span></p>
                 </div>
-                
                 <h2 class="hug-ask">Can I please hug you? 🥺</h2>
                 <div class="btn-group">
                     <button class="promise-btn yes-btn" onclick="showHug()">Yes 💖</button>
@@ -278,9 +239,6 @@
                 </div>
             </div>
 
-            
-
-            <!-- Clicks No -->
             <div id="step-please" style="display: none;">
                 <img src="please.gif" alt="Please" class="gif-img">
                 <h2 class="hug-ask">Pleaseee? 🥺</h2>
@@ -289,18 +247,16 @@
                 </div>
             </div>
 
-            <!-- Clicks Yes -->
             <div id="step-hug" style="display: none;">
                 <img src="hug.gif" alt="Hug" class="gif-img">
                 <h2 class="hug-ask">Yayy! *tight hug* 🥰</h2>
                 <button class="promise-btn yes-btn" onclick="enterDashboard()">Continue ✨</button>
             </div>
-
         </div>
     </div>
 
-    <!-- 2. MAIN PAGE (Soft & Sweet) -->
-    <div id="page-main">
+    <!-- 2. MAIN PAGE -->
+    <div id="page-main" class="page-view">
         <div class="dash-header">
             <h2>A Little Space for You 🌷</h2>
         </div>
@@ -311,7 +267,11 @@
             <p class="hint-text">(Tap to open)</p>
         </div>
 
-        <!-- The Typewriter Love Note -->
+        <!-- NEW: Trigger for the "Ask Out" Sequence -->
+        <div class="ask-btn-widget" onclick="openAskFlow()">
+            I have a small question for you... 🙈
+        </div>
+
         <div class="widget love-note">
             <div class="note-header">A little note for you... 💌</div>
             <div id="typewriter-text"></div><span class="cursor" id="cursor">|</span>
@@ -323,16 +283,71 @@
         </div>
     </div>
 
-    <!-- 3. HEART STATUS POP-UP OVERLAY -->
+    <!-- 3. THE "ASK OUT" INTERACTIVE FLOW -->
+    <div id="page-ask" class="page-view">
+        <div class="promise-card" style="box-shadow: none; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);">
+            
+            <!-- Question Step -->
+            <div id="ask-step-1" class="step-container" style="display: block;">
+                <h2 style="color: #dc143c; margin-bottom: 10px;">Will you let me take you out for food sometime soon? 🥺</h2>
+                <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">(Zero pressure, just good food and me being happy to see you)</p>
+                
+                <div class="runaway-container" id="runaway-box">
+                    <button class="promise-btn yes-btn stay-btn" onclick="nextAskStep(2)">Yes 💖</button>
+                    <!-- Touching or hovering this button moves it randomly -->
+                    <button class="promise-btn no-btn runaway-btn" id="runaway-btn" ontouchstart="dodgeBtn(event)" onmouseover="dodgeBtn(event)">No</button>
+                </div>
+            </div>
+
+            <!-- Food Picker Step -->
+            <div id="ask-step-2" class="step-container">
+                <h2 style="color: #dc143c;">Yay! What are we feeling? 🍽️</h2>
+                <p style="color: #666; font-size: 0.9em;">Pick your vibe</p>
+                
+                <div class="food-grid">
+                    <div class="food-item" onclick="setFood('Pizza 🍕')">🍕<span class="food-label">Pizza</span></div>
+                    <div class="food-item" onclick="setFood('Sushi 🍣')">🍣<span class="food-label">Sushi</span></div>
+                    <div class="food-item" onclick="setFood('Burgers 🍔')">🍔<span class="food-label">Burgers</span></div>
+                    <div class="food-item" onclick="setFood('Tacos 🌮')">🌮<span class="food-label">Tacos</span></div>
+                    <div class="food-item" onclick="setFood('Pasta 🍝')">🍝<span class="food-label">Pasta</span></div>
+                    <div class="food-item" onclick="setFood('Dessert 🍰')">🍰<span class="food-label">Dessert</span></div>
+                </div>
+            </div>
+
+            <!-- Invoice Step -->
+            <div id="ask-step-3" class="step-container">
+                <h2 style="color: #dc143c;">Perfect. It's a plan! 🚗</h2>
+                
+                <div class="invoice-card">
+                    <div class="invoice-header">One Small Fee</div>
+                    <div class="invoice-row">
+                        <span>Food Choice:</span>
+                        <span id="invoice-food" style="font-weight:bold;">Pizza 🍕</span>
+                    </div>
+                    <div class="invoice-row">
+                        <span>My treat:</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="invoice-row invoice-total">
+                        <span>Cost to you:</span>
+                        <span>1 Genuine Smile</span>
+                    </div>
+                </div>
+
+                <button class="pay-btn" onclick="backToMain()">Pay & Confirm 💖</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 4. HEART STATUS POP-UP OVERLAY -->
     <div id="status-modal" onclick="if(event.target === this) closeStatusModal()">
         <div class="modal-content">
             <div class="close-btn" onclick="closeStatusModal()">✖</div>
-            
             <div class="dash-header">
                 <h2>Checking In 🤍</h2>
                 <p class="hint-text">(Tap the tiles below)</p>
             </div>
-
             <div class="grid-container">
                 <div class="tile full" onclick="toggleTile(this)">
                     <div class="tile-icon">🛡️</div>
@@ -343,7 +358,6 @@
                         <div class="bar-label">100% Safe & Respected</div>
                     </div>
                 </div>
-                
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">⏳</div>
                     <div class="tile-title">Our Pace</div>
@@ -353,7 +367,6 @@
                         <div class="bar-label">15% (No rush at all)</div>
                     </div>
                 </div>
-                
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">🌱</div>
                     <div class="tile-title">Healing</div>
@@ -363,7 +376,6 @@
                         <div class="bar-label">75% & Growing</div>
                     </div>
                 </div>
-
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">🎢</div>
                     <div class="tile-title">Today's Mood</div>
@@ -373,7 +385,6 @@
                         <div class="bar-label">Valid, whatever it is.</div>
                     </div>
                 </div>
-
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">⚓</div>
                     <div class="tile-title">My Support</div>
@@ -383,7 +394,6 @@
                         <div class="bar-label">100% Unwavering</div>
                     </div>
                 </div>
-
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">😊</div>
                     <div class="tile-title">Your Smiles</div>
@@ -393,7 +403,6 @@
                         <div class="bar-label">100% Precious</div>
                     </div>
                 </div>
-
                 <div class="tile" onclick="toggleTile(this)">
                     <div class="tile-icon">🎶</div>
                     <div class="tile-title">Your Laugh</div>
@@ -413,7 +422,6 @@
             document.getElementById('step-poem').style.display = 'none';
             document.getElementById('step-please').style.display = 'block';
         }
-
         function showHug() {
             document.getElementById('step-poem').style.display = 'none';
             document.getElementById('step-please').style.display = 'none';
@@ -424,10 +432,8 @@
         function enterDashboard() {
             const gateway = document.getElementById('gateway');
             const pageMain = document.getElementById('page-main');
-            
             gateway.style.opacity = '0';
             gateway.style.transform = 'scale(1.1)';
-            
             setTimeout(() => {
                 gateway.style.display = 'none';
                 pageMain.style.display = 'flex';
@@ -437,6 +443,67 @@
             }, 600);
         }
 
+        // --- NEW: ASK FLOW LOGIC ---
+        function openAskFlow() {
+            const main = document.getElementById('page-main');
+            const ask = document.getElementById('page-ask');
+            main.style.opacity = '0';
+            setTimeout(() => {
+                main.style.display = 'none';
+                ask.style.display = 'flex';
+                void ask.offsetWidth;
+                ask.style.opacity = '1';
+            }, 500);
+        }
+
+        function backToMain() {
+            const main = document.getElementById('page-main');
+            const ask = document.getElementById('page-ask');
+            
+            // Re-trigger some cute hearts
+            sendLove();
+            
+            ask.style.opacity = '0';
+            setTimeout(() => {
+                ask.style.display = 'none';
+                main.style.display = 'flex';
+                void main.offsetWidth;
+                main.style.opacity = '1';
+                
+                // Reset the ask flow for next time
+                document.getElementById('ask-step-3').style.display = 'none';
+                document.getElementById('ask-step-1').style.display = 'block';
+            }, 500);
+        }
+
+        function nextAskStep(stepNum) {
+            document.querySelectorAll('.step-container').forEach(el => el.style.display = 'none');
+            document.getElementById('ask-step-' + stepNum).style.display = 'block';
+        }
+
+        function setFood(foodName) {
+            document.getElementById('invoice-food').innerText = foodName;
+            nextAskStep(3);
+        }
+
+        // The running away No button logic
+        function dodgeBtn(e) {
+            e.preventDefault(); // Stop touch from registering as a click
+            const btn = document.getElementById('runaway-btn');
+            const box = document.getElementById('runaway-box');
+            
+            // Calculate random position within the container
+            const maxX = box.clientWidth - btn.clientWidth;
+            const maxY = box.clientHeight - btn.clientHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        // --- STATUS MODAL LOGIC ---
         function openStatusModal() {
             const modal = document.getElementById('status-modal');
             const modalContent = modal.querySelector('.modal-content');
@@ -445,7 +512,6 @@
             modal.style.opacity = '1';
             modalContent.style.transform = 'scale(1)';
         }
-
         function closeStatusModal() {
             const modal = document.getElementById('status-modal');
             const modalContent = modal.querySelector('.modal-content');
@@ -453,7 +519,6 @@
             modalContent.style.transform = 'scale(0.9)';
             setTimeout(() => { modal.style.display = 'none'; }, 300);
         }
-
         function toggleTile(element) {
             const isActive = element.classList.contains('active');
             if (!isActive) {
@@ -471,7 +536,7 @@
             }
         }
 
-        // The Sweet Love Note lines
+        // --- TYPEWRITER LOGIC ---
         const noteLines = [
             "Hey you...",
             "Just a little reminder that I'm always here.",
@@ -479,14 +544,12 @@
             "Just me, completely amazed by you.",
             "Take all the time you need. ❤️"
         ];
-        
         let lineIdx = 0; let charIdx = 0; const termText = document.getElementById('typewriter-text');
-
         function startTyping() {
             if (lineIdx < noteLines.length) {
                 if (charIdx < noteLines[lineIdx].length) {
                     termText.innerHTML += noteLines[lineIdx].charAt(charIdx);
-                    charIdx++; setTimeout(startTyping, 50); // Slightly slower typing for a romantic feel
+                    charIdx++; setTimeout(startTyping, 50); 
                 } else {
                     termText.innerHTML += "<br><br>";
                     lineIdx++; charIdx = 0; setTimeout(startTyping, 600);
@@ -496,9 +559,9 @@
             }
         }
 
+        // --- FLOATING ANIMATIONS ---
         function sendHugs() { createFloatingItems(['🧸', '🤗', '✨'], 12); }
         function sendLove() { createFloatingItems(['🌷', '❤️', '💖'], 15); }
-
         function createFloatingItems(symbols, count) {
             for (let i = 0; i < count; i++) {
                 let item = document.createElement('div');
@@ -513,6 +576,5 @@
             }
         }
     </script>
-
 </body>
-</html> 
+</html>
