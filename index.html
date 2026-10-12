@@ -26,6 +26,47 @@
             justify-content: center;
         }
 
+        /* --- THE LOADING SCREEN --- */
+        #loading-screen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Pink gradient background */
+            background: linear-gradient(135deg, #ffccd5 0%, #f8cdda 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 999; /* Stays on top of everything */
+            transition: opacity 0.8s ease;
+        }
+
+        .loading-logo {
+            width: 140px;
+            height: auto;
+            /* Happy Dance Animation to simulate head wiggling */
+            animation: happyDance 2s infinite ease-in-out;
+            filter: drop-shadow(0 10px 15px rgba(220, 20, 60, 0.15));
+            margin-bottom: 20px;
+        }
+
+        @keyframes happyDance {
+            0%, 100% { transform: translateY(0) rotate(-8deg); }
+            50% { transform: translateY(-15px) rotate(8deg); }
+        }
+
+        .loading-text {
+            color: #dc143c;
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            animation: pulseText 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulseText {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         /* --- THE GATEWAY / POEM MODAL --- */
         #gateway {
             position: fixed;
@@ -92,7 +133,6 @@
             border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 8px 20px rgba(220, 20, 60, 0.1);
         }
 
-        /* Interactive Check Button */
         .status-check-btn {
             text-align: center; cursor: pointer; transition: transform 0.2s ease;
             background: rgba(255, 255, 255, 0.85); border: 2px solid rgba(220, 20, 60, 0.3);
@@ -101,10 +141,8 @@
         .status-check-btn h3 { color: #dc143c; font-size: 1.2em; margin: 10px 0 5px 0; }
         
         .pulse-heart { font-size: 40px; display: inline-block; animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
         .hint-text { font-size: 0.85em; color: #888; font-style: italic; }
 
-        /* Soft Love Note Widget */
         .love-note {
             background: #fffafa; color: #4a4a4a; border: 1px dashed rgba(220, 20, 60, 0.4);
             min-height: 130px; font-size: 1.05em;
@@ -117,7 +155,6 @@
         .cursor { color: #dc143c; animation: blink 1s step-end infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* Action Buttons */
         .action-widget { display: flex; justify-content: space-between; gap: 10px; }
         .action-btn {
             flex: 1; background: rgba(255, 255, 255, 0.9); color: #dc143c;
@@ -126,7 +163,6 @@
         }
         .action-btn:active { transform: scale(0.92); background: #dc143c; color: white; }
 
-        /* Special Ask Button */
         .ask-btn-widget {
             background: linear-gradient(135deg, #ff512f, #dd2476);
             color: white; text-align: center; border-radius: 24px; padding: 20px;
@@ -135,26 +171,15 @@
         }
         .ask-btn-widget:active { transform: scale(0.96); }
 
-        /* --- THE "ASK OUT" FLOW (INSPIRED BY VIDEO) --- */
+        /* --- THE "ASK OUT" FLOW --- */
         #page-ask { align-items: center; justify-content: center; min-height: 80vh; }
-        
         .step-container { display: none; width: 100%; text-align: center; }
         
-        /* Step 1: The Question */
-        .runaway-container {
-            position: relative; width: 100%; height: 180px; margin-top: 30px;
-        }
-        .runaway-btn {
-            position: absolute; width: 120px; left: calc(50% + 10px); top: 20px;
-        }
-        .stay-btn {
-            position: absolute; width: 140px; left: calc(50% - 150px); top: 20px;
-        }
+        .runaway-container { position: relative; width: 100%; height: 180px; margin-top: 30px; }
+        .runaway-btn { position: absolute; width: 120px; left: calc(50% + 10px); top: 20px; }
+        .stay-btn { position: absolute; width: 140px; left: calc(50% - 150px); top: 20px; }
 
-        /* Step 2: Food Grid */
-        .food-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px;
-        }
+        .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 25px; }
         .food-item {
             background: white; border: 2px solid rgba(220, 20, 60, 0.2); border-radius: 18px;
             padding: 15px 5px; font-size: 2em; text-align: center; cursor: pointer;
@@ -163,7 +188,6 @@
         .food-item:active { transform: scale(0.9); border-color: #dc143c; }
         .food-label { font-size: 0.35em; font-weight: bold; color: #555; display: block; margin-top: 5px; font-family: sans-serif;}
 
-        /* Step 3: Fake Invoice */
         .invoice-card {
             background: white; border-radius: 20px; padding: 30px 20px; margin-top: 20px;
             border: 1px solid #eee; text-align: left; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -194,7 +218,6 @@
         }
         .close-btn:active { background: rgba(220, 20, 60, 0.2); transform: scale(0.9); }
 
-        /* Tiles */
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
         .tile {
             background: rgba(255, 255, 255, 0.85); border-radius: 20px; padding: 15px; text-align: center; border: 1px solid rgba(220, 20, 60, 0.15); box-shadow: 0 4px 15px rgba(220, 20, 60, 0.08); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 110px; cursor: pointer; transition: transform 0.2s ease;
@@ -219,6 +242,13 @@
     </style>
 </head>
 <body>
+
+    <!-- 0. THE NEW LOADING SCREEN -->
+    <div id="loading-screen">
+        <!-- Make sure you upload the image as 'logo.png' -->
+        <img src="logo.png" alt="Loading Logo" class="loading-logo">
+        <div class="loading-text">Loading smiles...</div>
+    </div>
 
     <!-- 1. STARTUP GATEWAY -->
     <div id="gateway">
@@ -267,7 +297,6 @@
             <p class="hint-text">(Tap to open)</p>
         </div>
 
-        <!-- NEW: Trigger for the "Ask Out" Sequence -->
         <div class="ask-btn-widget" onclick="openAskFlow()">
             I have a small question for you... 🙈
         </div>
@@ -287,19 +316,16 @@
     <div id="page-ask" class="page-view">
         <div class="promise-card" style="box-shadow: none; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);">
             
-            <!-- Question Step -->
             <div id="ask-step-1" class="step-container" style="display: block;">
                 <h2 style="color: #dc143c; margin-bottom: 10px;">Will you let me take you out for food sometime soon? 🥺</h2>
                 <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">(Zero pressure, just good food and me being happy to see you)</p>
                 
                 <div class="runaway-container" id="runaway-box">
                     <button class="promise-btn yes-btn stay-btn" onclick="nextAskStep(2)">Yes 💖</button>
-                    <!-- Touching or hovering this button moves it randomly -->
                     <button class="promise-btn no-btn runaway-btn" id="runaway-btn" ontouchstart="dodgeBtn(event)" onmouseover="dodgeBtn(event)">No</button>
                 </div>
             </div>
 
-            <!-- Food Picker Step -->
             <div id="ask-step-2" class="step-container">
                 <h2 style="color: #dc143c;">Yay! What are we feeling? 🍽️</h2>
                 <p style="color: #666; font-size: 0.9em;">Pick your vibe</p>
@@ -314,7 +340,6 @@
                 </div>
             </div>
 
-            <!-- Invoice Step -->
             <div id="ask-step-3" class="step-container">
                 <h2 style="color: #dc143c;">Perfect. It's a plan! 🚗</h2>
                 
@@ -333,10 +358,8 @@
                         <span>1 Genuine Smile</span>
                     </div>
                 </div>
-
                 <button class="pay-btn" onclick="backToMain()">Pay & Confirm 💖</button>
             </div>
-
         </div>
     </div>
 
@@ -417,6 +440,20 @@
     </div>
 
     <script>
+        // --- NEW: LOADING SCREEN LOGIC ---
+        // Wait 3 seconds, then seamlessly fade out the loading screen to reveal the gateway
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loading-screen');
+                loader.style.opacity = '0';
+                
+                // Wait for the fade transition to finish before hiding it completely
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 800); 
+            }, 3000); 
+        });
+
         // --- POEM & HUG LOGIC ---
         function showPlease() {
             document.getElementById('step-poem').style.display = 'none';
@@ -443,7 +480,7 @@
             }, 600);
         }
 
-        // --- NEW: ASK FLOW LOGIC ---
+        // --- ASK FLOW LOGIC ---
         function openAskFlow() {
             const main = document.getElementById('page-main');
             const ask = document.getElementById('page-ask');
@@ -459,18 +496,13 @@
         function backToMain() {
             const main = document.getElementById('page-main');
             const ask = document.getElementById('page-ask');
-            
-            // Re-trigger some cute hearts
             sendLove();
-            
             ask.style.opacity = '0';
             setTimeout(() => {
                 ask.style.display = 'none';
                 main.style.display = 'flex';
                 void main.offsetWidth;
                 main.style.opacity = '1';
-                
-                // Reset the ask flow for next time
                 document.getElementById('ask-step-3').style.display = 'none';
                 document.getElementById('ask-step-1').style.display = 'block';
             }, 500);
@@ -486,19 +518,14 @@
             nextAskStep(3);
         }
 
-        // The running away No button logic
         function dodgeBtn(e) {
-            e.preventDefault(); // Stop touch from registering as a click
+            e.preventDefault(); 
             const btn = document.getElementById('runaway-btn');
             const box = document.getElementById('runaway-box');
-            
-            // Calculate random position within the container
             const maxX = box.clientWidth - btn.clientWidth;
             const maxY = box.clientHeight - btn.clientHeight;
-            
             const randomX = Math.floor(Math.random() * maxX);
             const randomY = Math.floor(Math.random() * maxY);
-            
             btn.style.left = randomX + 'px';
             btn.style.top = randomY + 'px';
         }
